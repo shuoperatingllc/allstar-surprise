@@ -1,0 +1,27 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>✨</title><meta name="robots" content="noindex">
+<style>
+html,body{margin:0;height:100%;background:#000;overflow:hidden}
+#photo{position:fixed;inset:0;width:100%;height:100%;object-fit:contain}
+#ov{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;
+background:radial-gradient(circle,#ff3cac,#784ba0 60%,#2b86c5);color:#fff;font:800 2.2rem/1.2 system-ui,sans-serif;
+text-align:center;padding:2rem;cursor:pointer;transition:opacity .8s;z-index:5;-webkit-tap-highlight-color:transparent}
+#ov small{font-size:1.1rem;font-weight:500;margin-top:1rem;animation:p 1s infinite alternate}
+@keyframes p{from{transform:scale(1)}to{transform:scale(1.12)}}
+#ov.gone{opacity:0;pointer-events:none}
+#yt{position:fixed;width:1px;height:1px;left:-10px;bottom:0;opacity:0;pointer-events:none}
+</style></head><body>
+<img id="photo" src="photo.jpg" alt="">
+<div id="ov">Tap to see something amazing 🤩<small>👆 tap anywhere</small></div>
+<div id="yt"><div id="player"></div></div>
+<script>
+var player,ready=false,want=false;
+var t=document.createElement('script');t.src='https://www.youtube.com/iframe_api';document.head.appendChild(t);
+function onYouTubeIframeAPIReady(){player=new YT.Player('player',{width:1,height:1,videoId:'L_jWHffIx5E',
+playerVars:{autoplay:1,loop:1,playlist:'L_jWHffIx5E',playsinline:1,controls:0,rel:0},
+events:{onReady:function(){ready=true;player.unMute();player.setVolume(100);player.playVideo();if(want)go();},
+onStateChange:function(e){if(e.data===YT.PlayerState.ENDED){player.seekTo(0);player.playVideo();}}}});}
+function go(){if(!ready)return;player.unMute();player.setVolume(100);player.playVideo();}
+document.getElementById('ov').addEventListener('click',function(){want=true;go();this.classList.add('gone');});
+</script></body></html>
